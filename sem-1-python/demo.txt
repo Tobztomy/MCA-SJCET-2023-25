@@ -1,0 +1,3 @@
+python
+interpreted high-level language
+python is object oriented programming language
