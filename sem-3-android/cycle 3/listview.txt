@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/e1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/l1"
+        android:layout_width="338dp"
+        android:layout_height="186dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/e1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="267dp"
+        android:layout_marginEnd="50dp"
+        android:text="Account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+package com.example.listview;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private TextView tv;
+    private ListView lv;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        tv=findViewById(R.id.e1);
+        String msg=getIntent().getStringExtra("mykey");// receiving the data
+        tv.setText("welcome " + msg);
+        lv=findViewById(R.id.l1);// display(welcom changing to admin)
+// listvivew operation
+        String[] courses={"MCA","MBA","BBA","BCA"};
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,courses);
+        lv.setAdapter(adapter);
+// attach listener
+        lv.setOnItemClickListener(this);//implement the method by alt+enter
+    }
+
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        String itemname=lv.getItemAtPosition(i).toString();
+        tv.setText("welcome " + itemname);
+        Toast.makeText(this,itemname,Toast.LENGTH_SHORT).show();
+    }
+
+}

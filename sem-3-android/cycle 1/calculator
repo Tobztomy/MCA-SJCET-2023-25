@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:text="Result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="50dp"
+        android:onClick="add"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/e2" />
+
+    <EditText
+        android:id="@+id/e1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:hint="number 1"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t1" />
+
+    <EditText
+        android:id="@+id/e2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="number 2"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/e1" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:text="-"
+        android:onClick="substract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/b1" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:text="x"
+        android:onClick="multiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:text="/"
+        android:onClick="divide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+java
+
+
+package com.example.m2;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    EditText o1;
+    EditText o2;
+    TextView tv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        o1 = (EditText) findViewById(R.id.e1);
+        o2 = (EditText) findViewById(R.id.e2);
+        tv=(TextView) findViewById(R.id.t1);
+    }
+
+
+    public void add(View view) {
+        String s1=o1.getText().toString();
+        String s2=o2.getText().toString();
+        int num1 = Integer.parseInt(s1);
+        int num2 = Integer.parseInt(s2);
+        int sum=num1+num2;
+        tv.setText(Integer.toString(sum));
+    }
+
+    public void substract(View view) {
+        String s1=o1.getText().toString();
+        String s2=o2.getText().toString();
+        int num1 = Integer.parseInt(s1);
+        int num2 = Integer.parseInt(s2);
+        int sub=num1-num2;
+        tv.setText(Integer.toString(sub));
+    }
+
+    public void multiply(View view) {
+        String s1=o1.getText().toString();
+        String s2=o2.getText().toString();
+        int num1 = Integer.parseInt(s1);
+        int num2 = Integer.parseInt(s2);
+        int mul=num1*num2;
+        tv.setText(Integer.toString(mul));
+    }
+
+    public void divide(View view) {
+        String s1=o1.getText().toString();
+        String s2=o2.getText().toString();
+        int num1 = Integer.parseInt(s1);
+        int num2 = Integer.parseInt(s2);
+        int div=num1/num2;
+        tv.setText(Integer.toString(div));
+    }
+}

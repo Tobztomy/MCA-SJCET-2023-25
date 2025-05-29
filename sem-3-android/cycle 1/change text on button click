@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="50dp"
+        android:text="Hello World!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/e1" />
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="50dp"
+        android:text="click here"
+        
+        android:onClick="click"
+        
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t1" />
+
+    <EditText
+        android:id="@+id/e1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="108dp"
+        android:ems="10"
+        android:inputType="text"
+        
+        android:hint="enter name"
+        
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+java file
+
+package com.example.m2;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    EditText t1;
+    TextView tv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        t1 = (EditText) findViewById(R.id.e1);
+        tv=(TextView) findViewById(R.id.t1);
+    }
+
+    public void click(View view) {
+        tv.setText(t1.getText().toString());
+    }
+}
+
+
+without textfield
+public void click(View view) {
+        tv.setText("hello tobin");
+        
+    }

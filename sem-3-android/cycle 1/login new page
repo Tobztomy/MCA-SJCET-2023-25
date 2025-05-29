@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/t1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/d1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.519" />
+
+    <EditText
+        android:id="@+id/e1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:hint="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="50dp"
+        android:text="username"
+        app:layout_constraintEnd_toStartOf="@+id/e1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/e2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:hint="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/e1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="50dp"
+        android:text="password"
+        app:layout_constraintEnd_toStartOf="@+id/e2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="login"
+        android:onClick="login"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/e2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/e2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+package com.example.login;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    EditText o1;
+    EditText o2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.t1), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        o1 = (EditText) findViewById(R.id.e1);
+        o2 = (EditText) findViewById(R.id.e2);
+    }
+
+    public void login(View view) {
+        String username = o1.getText().toString();
+        String password = o2.getText().toString();
+        if (isValidCredentials(username, password)) {
+            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this,MainActivity2.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isValidCredentials(String username, String password) {
+        // Example validation: Replace with your own logic
+        return username.equals("admin") && password.equals("1234");
+    }
+
+
+
+}
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="219dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="50dp"
+        android:background="#C09797"
+        android:text="hello welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+package com.example.login;
+
+import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity2 extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main2);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+}
