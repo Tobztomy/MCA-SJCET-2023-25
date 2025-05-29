@@ -1,0 +1,28 @@
+SQL> create table EMP(empno NUMBER(4), ename VARCHAR2(25), job VARCHAR2(12),salary NUMBER(10,2),commission NUMBER(7,2), deptno NUMBER(2),join date);
+
+Table created.
+SQL> insert into EMP values(7369,'SMITH','CLERK',2000,800,20,null);
+
+1 row created.
+
+SQL> update emp set join='15-dec-2001' where join is null;
+
+1 row updated.
+
+SQL> select * from emp;
+
+     EMPNO ENAME                     JOB              SALARY COMMISSION     DEPTNO JOIN
+---------- ------------------------- ------------ ---------- ---------- ---------- ---------
+      7369 SMITH                     CLERK              2000        800         20 15-DEC-01
+
+SQL> create table EMP(empno NUMBER(4), ename VARCHAR2(25), job VARCHAR2(12),salary NUMBER(10,2),commission NUMBER(7,2), deptno NUMBER(2));
+
+Table created.
+
+SQL> insert into EMP values(7499,'ALLEN','SALESMAN',1600,300,null);
+
+1 row created.
+
+SQL> update emp set deptno=20 where deptno is null;
+
+1 row updated.
